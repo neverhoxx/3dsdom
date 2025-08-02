@@ -4,9 +4,11 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-export default function RootLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
+export default async function RootLayout({ children, params }: { children: React.ReactNode, params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+
   return (
-    <html lang={params.locale}>
+    <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}>
         {children}
       </body>
